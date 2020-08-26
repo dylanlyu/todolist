@@ -1,11 +1,11 @@
 package database
 
 import (
-	"first/configs"
-	"first/internal/graph/models"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"todolist/configs"
+	"todolist/internal/graph/models"
 )
 
 var config *configs.Configs
