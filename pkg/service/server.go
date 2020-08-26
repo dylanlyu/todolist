@@ -1,10 +1,10 @@
 package service
 
 import (
-	"todolist/internal/database"
-	"todolist/internal/handlers"
 	"github.com/gin-gonic/gin"
 	"log"
+	"todolist/internal/database"
+	"todolist/internal/handlers"
 )
 
 // RunGraphServer is gin server

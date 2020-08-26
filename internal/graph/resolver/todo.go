@@ -4,7 +4,7 @@ import (
 	"todolist/internal/graph/models"
 )
 
-func CreateUpdateTodo(r *mutationResolver,input models.NewTodo, update bool, ids ...string) (*models.Todo, error) {
+func CreateUpdateTodo(r *mutationResolver, input models.NewTodo, update bool, ids ...string) (*models.Todo, error) {
 	todo := models.Todo{
 		Text: input.Text,
 	}

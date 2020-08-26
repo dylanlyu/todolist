@@ -5,23 +5,23 @@ package resolver
 
 import (
 	"context"
-	generated1 "todolist/internal/graph/generated"
-	models1 "todolist/internal/graph/models"
+	"todolist/internal/graph/generated"
+	"todolist/internal/graph/models"
 )
 
-func (r *mutationResolver) CreateTodo(ctx context.Context, input models1.NewTodo) (*models1.Todo, error) {
+func (r *mutationResolver) CreateTodo(ctx context.Context, input models.NewTodo) (*models.Todo, error) {
 	return CreateUpdateTodo(r, input, false)
 }
 
-func (r *queryResolver) Todos(ctx context.Context) ([]*models1.Todo, error) {
+func (r *queryResolver) Todos(ctx context.Context) ([]*models.Todo, error) {
 	return SelectTodos(r)
 }
 
-// Mutation returns generated1.MutationResolver implementation.
-func (r *Resolver) Mutation() generated1.MutationResolver { return &mutationResolver{r} }
+// Mutation returns generated.MutationResolver implementation.
+func (r *Resolver) Mutation() generated.MutationResolver { return &mutationResolver{r} }
 
-// Query returns generated1.QueryResolver implementation.
-func (r *Resolver) Query() generated1.QueryResolver { return &queryResolver{r} }
+// Query returns generated.QueryResolver implementation.
+func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
