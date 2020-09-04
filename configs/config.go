@@ -18,7 +18,7 @@ func GetConfig() *Configs {
 	config.PostgreSQL.Port = 5432
 	config.PostgreSQL.User = "dylan"
 	config.PostgreSQL.Password = "123456"
-	config.PostgreSQL.DBName = "todo"
+	config.PostgreSQL.DBName = "test_db"
 	config.PostgreSQL.SSLMode = "disable"
 
 	return &config

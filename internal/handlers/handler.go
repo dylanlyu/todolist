@@ -1,23 +1,26 @@
 package handlers
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
-
-	"todolist/internal/graph/generated"
-	"todolist/internal/graph/resolver"
-
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
+	"github.com/gin-gonic/gin"
+	"todolist/internal/graph/generated"
+	"todolist/internal/graph/resolver"
 )
 
 // GraphqlHandler is gin handler to graph
-func GraphqlHandler(db *gorm.DB) gin.HandlerFunc {
+func GraphqlHandler() gin.HandlerFunc {
 	// NewExecutableSchema and Config are in the generated.go file
 	// Resolver is in the resolver.go file
-	h := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &resolver.Resolver{
-		DB: db,
-	}}))
+	h := handler.NewDefaultServer(
+		generated.NewExecutableSchema(
+			generated.Config{
+				Resolvers: &resolver.Resolver{
+
+				},
+			},
+		),
+	)
 
 	return func(c *gin.Context) {
 		h.ServeHTTP(c.Writer, c.Request)

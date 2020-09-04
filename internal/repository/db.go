@@ -1,11 +1,11 @@
-package database
+package repository
 
 import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"todolist/configs"
-	"todolist/internal/graph/models"
+	"todolist/internal/models"
 )
 
 var config *configs.Configs
@@ -28,4 +28,5 @@ func GetDatabase() (*gorm.DB, error) {
 
 func Migrate(db *gorm.DB) {
 	db.AutoMigrate(&models.Todo{})
+	db.AutoMigrate(&models.User{})
 }
