@@ -26,40 +26,45 @@ func NewTodoRepo(db *gorm.DB) Repo {
 	}
 }
 
-func (tr *todoRepo) ReadByID(id int) (todo *models.Todo,err error) {
-	err = tr.db.First(&todo,id).Error
+func (tr *todoRepo) ReadByID(id int) (*models.Todo, error) {
+	var todo *models.Todo
+	err := tr.db.First(&todo,id).Error
 	if err != nil {
 		return nil, err
 	}
 	return todo,nil
 }
 
-func (tr todoRepo) ReadByText(text string) (todos []*models.Todo, err error) {
-	err = tr.db.Find(&todos,"text LINK ?","%"+text+"%").Error
+func (tr todoRepo) ReadByText(text string) ([]*models.Todo, error) {
+	var todos []*models.Todo
+	err := tr.db.Find(&todos,"text LINK ?","%"+text+"%").Error
 	if err != nil {
 		return nil, err
 	}
 	return todos,nil
 }
 
-func (tr todoRepo) ReadDone(done bool) (todos []*models.Todo, err error) {
-	err = tr.db.Find(&todos, models.Todo{Done: done}).Error
+func (tr todoRepo) ReadDone(done bool) ([]*models.Todo, error) {
+	var todos []*models.Todo
+	err := tr.db.Find(&todos, models.Todo{Done: done}).Error
 	if err != nil {
 		return nil, err
 	}
 	return todos,nil
 }
 
-func (tr todoRepo) ReadByUserID(uid int) (todos []*models.Todo,err error) {
-	err = tr.db.Find(&todos,models.Todo{UserID: uid}).Error
+func (tr todoRepo) ReadByUserID(uid int) ([]*models.Todo, error) {
+	var todos []*models.Todo
+	err := tr.db.Find(&todos,models.Todo{UserID: uid}).Error
 	if err != nil {
 		return nil, err
 	}
 	return todos,nil
 }
 
-func (tr todoRepo) Read() (todos []*models.Todo, err error) {
-	err = tr.db.Find(&todos).Error
+func (tr todoRepo) Read() ([]*models.Todo, error) {
+	var todos []*models.Todo
+	err := tr.db.Find(&todos).Error
 	if err != nil {
 		return nil, err
 	}

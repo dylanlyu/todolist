@@ -31,3 +31,7 @@ func (ur userRepo) Create(user *models.User) (*models.User, error) {
 	}
 	return user,nil
 }
+
+func (ur userRepo) Read() (users []*models.User, err error) {
+
+}
