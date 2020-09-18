@@ -9,6 +9,7 @@ type UserService interface {
 	CreateUser(newUser *models.NewUser) (*models.User, error)
 	GetUser(id int) (*models.User, error)
 	SearchUser(name string) ([]*models.User, error)
+	DeleteUser(id int) (*models.User,error)
 }
 
 type userService struct {
@@ -35,4 +36,11 @@ func (us userService) GetUser(id int) (*models.User, error) {
 
 func (us userService) SearchUser(name string) ([]*models.User, error) {
 	return us.Repo.ReadByName(name)
+}
+
+func (us userService) DeleteUser(id int) (*models.User,error) {
+	user:=&models.User{
+		ID: id,
+	}
+	return us.Repo.Delete(user)
 }

@@ -38,6 +38,14 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input models.NewUser)
 	return r.UserService.CreateUser(&input)
 }
 
+func (r *mutationResolver) DeleteTodo(ctx context.Context, id int) (*models.Todo, error) {
+	return r.TodoService.DeleteTodo(id)
+}
+
+func (r *mutationResolver) DeleteUser(ctx context.Context, id int) (*models.User, error) {
+	return r.UserService.DeleteUser(id)
+}
+
 func (r *queryResolver) SearchTodos(ctx context.Context, input models.SearchTodo) ([]*models.Todo, error) {
 	data, _ := json.Marshal(&input)
 	gc, err := middlewares.GinContextFromContext(ctx)

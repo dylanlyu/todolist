@@ -35,4 +35,6 @@ input SearchTodo {
 type Mutation {
   createTodo(input: NewTodo!): Todo!
   createUser(input: NewUser!): User!
+  deleteTodo(id: Int!): Todo!
+  deleteUser(id: Int!): User!
 }

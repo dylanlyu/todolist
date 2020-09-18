@@ -10,6 +10,7 @@ type TodoService interface {
 	CreateTodo(input *models.NewTodo) (*models.Todo, error)
 	GetTodo(id int) (*models.Todo, error)
 	SearchTodos(input *models.SearchTodo) ([]*models.Todo, error)
+	DeleteTodo(id int) (*models.Todo, error)
 }
 
 type todoService struct {
@@ -44,4 +45,8 @@ func (ts todoService) SearchTodos(input *models.SearchTodo) ([]*models.Todo, err
 		return ts.Repo.ReadByDoneAndUserID(input.Done,input.UserID)
 	}
 	return nil, errors.New("pls key in effective value")
+}
+
+func (ts todoService) DeleteTodo(id int) (*models.Todo, error) {
+	return ts.DeleteTodo(id)
 }
