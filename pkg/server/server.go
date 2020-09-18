@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"todolist/internal/handlers"
+	"todolist/internal/middlewares"
 	"todolist/internal/repository"
 )
 
@@ -17,8 +18,11 @@ func RunGraphServer() {
 	defer db.Close()
 	repository.Migrate(db)
 
+	resolverConfig := handlers.ResolverConfig(db)
+
 	r := gin.Default()
-	r.POST("first", handlers.GraphqlHandler())
-	r.GET("/", handlers.PlaygroundHandler())
+	r.Use(middlewares.GinContextToContextMiddleware())
+	r.POST("first", handlers.GraphqlHandler(resolverConfig))
+	//r.GET("/", handlers.PlaygroundHandler())
 	r.Run(":8080")
 }

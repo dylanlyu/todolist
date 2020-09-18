@@ -11,6 +11,8 @@ type Repo interface {
 	ReadByText(text string) ([]*models.Todo, error)
 	ReadDone(done bool) ([]*models.Todo, error)
 	ReadByUserID(id int) ([]*models.Todo, error)
+	ReadByTextAndUserID(text *string,uid int) ([]*models.Todo, error)
+	ReadByDoneAndUserID(done *bool,uid int) ([]*models.Todo, error)
 	Read()([]*models.Todo,error)
 	Update(todo *models.Todo) (*models.Todo,error)
 	Delete(todo *models.Todo) (*models.Todo,error)
@@ -47,6 +49,24 @@ func (tr todoRepo) ReadByText(text string) ([]*models.Todo, error) {
 func (tr todoRepo) ReadDone(done bool) ([]*models.Todo, error) {
 	var todos []*models.Todo
 	err := tr.db.Find(&todos, models.Todo{Done: done}).Error
+	if err != nil {
+		return nil, err
+	}
+	return todos,nil
+}
+
+func (tr todoRepo) ReadByTextAndUserID(text *string,uid int) ([]*models.Todo, error) {
+	var todos []*models.Todo
+	err := tr.db.Where("text LINK ? and user_id = ?","%"+*text+"%",uid).Find(&todos).Error
+	if err != nil {
+		return nil, err
+	}
+	return todos,nil
+}
+
+func (tr todoRepo) ReadByDoneAndUserID(done *bool,uid int) ([]*models.Todo, error) {
+	var todos []*models.Todo
+	err := tr.db.Find(&todos, models.Todo{Done: *done,UserID: uid}).Error
 	if err != nil {
 		return nil, err
 	}

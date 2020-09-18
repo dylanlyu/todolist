@@ -1,18 +1,20 @@
 type Todo {
-  id: ID!
+  id: Int!
   text: String!
   done: Boolean!
   user: User!
 }
 
 type User {
-  id: ID!
+  id: Int!
   name: String!
 }
 
 type Query {
-  searchTodos: [Todo!]!
-  searchUser(id: ID,name: String): User
+  searchTodos(input: SearchTodo!): [Todo!]!
+  searchUsers(name: String!): [User!]!
+  getUser(id: Int!): User!
+  getTodo(id: Int!): Todo!
 }
 
 input NewTodo {
@@ -22,6 +24,12 @@ input NewTodo {
 
 input NewUser {
   name: String!
+}
+
+input SearchTodo {
+  text: String
+  done: Boolean
+  userId: Int!
 }
 
 type Mutation {

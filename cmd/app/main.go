@@ -1,6 +1,6 @@
 package main
 
-import "todolist/pkg/service"
+import "todolist/pkg/server"
 
 func main() {
 	server.RunGraphServer()
